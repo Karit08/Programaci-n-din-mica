@@ -1,0 +1,10 @@
+# Binarios y ejecutables compilados
+tictactoe
+*.exe
+*.out
+*.o
+
+# Archivos del sistema y del editor
+.DS_Store
+.vscode/
+.idea/
