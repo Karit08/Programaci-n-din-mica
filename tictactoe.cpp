@@ -1,7 +1,7 @@
 /**
  * ============================================================================
  * PROYECTO: Juego de Tic Tac Toe (Tres en Raya / Gato)
- * ASIGNATURA: Estructuras de Datos
+ * ASIGNATURA: Programacion Dinamica
  * ESTUDIANTE: Karla Itzel Jimenez Molina
  * 
  * DESCRIPCIÓN:

@@ -1,6 +1,6 @@
-# 📚 Mini Proyectos de Programación Dinámica y Estructuras de Datos
+# 📚 Mini Proyectos de Programación Dinámica
 
-Repositorio oficial para la entrega y seguimiento del desarrollo de los **Mini Proyectos** correspondientes a la asignatura de Programación Dinámica / Estructuras de Datos.
+Repositorio oficial para la entrega y seguimiento del desarrollo de los **Mini Proyectos** correspondientes a la asignatura de Programación Dinámica 
 
 ---
 
