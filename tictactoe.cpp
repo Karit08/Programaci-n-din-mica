@@ -6,7 +6,8 @@
  * 
  * DESCRIPCIÓN:
  *   Estructura modular para dos jugadores por turnos en consola.
- *   Permite ingresar casillas del 1 al 9 y colocar las fichas 'X' y 'O'.
+ *   Detección completa de condiciones de victoria (filas, columnas, diagonales)
+ *   y condiciones de empate.
  * ============================================================================
  */
 
@@ -19,6 +20,8 @@ void inicializarTablero(char tablero[3][3]);
 void mostrarTablero(const char tablero[3][3]);
 bool casillaDisponible(const char tablero[3][3], int casilla);
 bool colocarFicha(char tablero[3][3], int casilla, char ficha);
+bool verificarGanador(const char tablero[3][3], char ficha);
+bool verificarEmpate(const char tablero[3][3]);
 
 int main() {
     char tablero[3][3];
@@ -27,9 +30,9 @@ int main() {
     cout << "=== TIC TAC TOE (TRES EN RAYA) - MODO 2 JUGADORES ===\n";
 
     int turno = 1; // 1: Jugador 1 ('X'), 2: Jugador 2 ('O')
-    int jugadas = 0;
+    bool juegoTerminado = false;
 
-    while (jugadas < 9) {
+    while (!juegoTerminado) {
         mostrarTablero(tablero);
 
         char fichaActual = (turno == 1) ? 'X' : 'O';
@@ -48,12 +51,27 @@ int main() {
             continue;
         }
 
-        jugadas++;
-        turno = (turno == 1) ? 2 : 1;
+        // 1. Evaluar si el jugador actual gano
+        if (verificarGanador(tablero, fichaActual)) {
+            mostrarTablero(tablero);
+            cout << "*****************************************************\n";
+            cout << " ¡Felicidades! Jugador " << turno << " [" << fichaActual << "] ha ganado!\n";
+            cout << "*****************************************************\n";
+            juegoTerminado = true;
+        }
+        // 2. Evaluar si hubo empate
+        else if (verificarEmpate(tablero)) {
+            mostrarTablero(tablero);
+            cout << "*****************************************************\n";
+            cout << " ¡Empate! Se han ocupado todas las casillas sin ganador.\n";
+            cout << "*****************************************************\n";
+            juegoTerminado = true;
+        }
+        // 3. Cambiar de turno
+        else {
+            turno = (turno == 1) ? 2 : 1;
+        }
     }
-
-    mostrarTablero(tablero);
-    cout << "Fin del juego por limite de jugadas.\n";
 
     return 0;
 }
@@ -94,5 +112,41 @@ bool colocarFicha(char tablero[3][3], int casilla, char ficha) {
     int fila = (casilla - 1) / 3;
     int col  = (casilla - 1) % 3;
     tablero[fila][col] = ficha;
+    return true;
+}
+
+bool verificarGanador(const char tablero[3][3], char ficha) {
+    // 1. Filas
+    for (int i = 0; i < 3; ++i) {
+        if (tablero[i][0] == ficha && tablero[i][1] == ficha && tablero[i][2] == ficha) {
+            return true;
+        }
+    }
+    // 2. Columnas
+    for (int j = 0; j < 3; ++j) {
+        if (tablero[0][j] == ficha && tablero[1][j] == ficha && tablero[2][j] == ficha) {
+            return true;
+        }
+    }
+    // 3. Diagonal principal
+    if (tablero[0][0] == ficha && tablero[1][1] == ficha && tablero[2][2] == ficha) {
+        return true;
+    }
+    // 4. Diagonal secundaria
+    if (tablero[0][2] == ficha && tablero[1][1] == ficha && tablero[2][0] == ficha) {
+        return true;
+    }
+
+    return false;
+}
+
+bool verificarEmpate(const char tablero[3][3]) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            if (tablero[i][j] != 'X' && tablero[i][j] != 'O') {
+                return false;
+            }
+        }
+    }
     return true;
 }
