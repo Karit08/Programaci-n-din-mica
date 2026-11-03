@@ -131,4 +131,4 @@ Programacion Dinamica/
 ## 👤 Autor
 
 - **Karla Itzel Jimenez Molina**
-- Estudiante de Programación Dinámica / Estructuras de Datos
+- Estudiante de Programación Dinámica
